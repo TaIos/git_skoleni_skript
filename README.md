@@ -1,29 +1,30 @@
 # GIT školení skript
-## 1. GIT Object Model
-## 2. Interaktivní demo
+## 1. Úvod
+## 2. GIT Object Model
+## 3. Instalace GITu
+## 4. Interaktivní demo
 ### Základ
 * `git init` (initialize)
 	* `.git/objects`
-	* `.git/refs`
 	* `.git/config`
 	* `.git/hooks`
-* `git help init`
+* `git help <command>`
 * `git status`
-	* popis výstupu
-* vytvořit soubor
+* vytvořit README.md
 * vysvětlit staging area
 	* `git status`
 	* `git add <file>`
 	* `git status`
 * `git commit`
-	* graficky vysvětlit
+	* `git cat-file -t <hash>`
 	* `git cat-file -p <hash>`
 * `git log --all --graph --oneline`
 * popsat reference
-	* `master`, `HEAD`
-* `git checkout <hash>`
+	* vizuální příklad v [větvením](https://learngitbranching.js.org/?NODEMO=&locale=en_US)
+* další commit
+	* popsat posouvání referencí
+* `git checkout <hash|branch>`
 	* zmeni ukazatel `HEAD` a obsah working directory 
-	* `HEAD x master`
 * `git checkout master`
 	* edit
 	* `git stash`
@@ -35,7 +36,7 @@
 
 ### Branching & merging
 
-* python skript
+* *script.py*
 ```
 import sys
 
@@ -48,73 +49,79 @@ def main():
 if __name__ == "__main__":
     main()
 ```
-* `git branch`, `git branch -vv`
-* `git ranch cat`
-	* popsat (pointer update)
+* `git branch`
+* `git branch <name(cat)>`
 	* `git checkout cat`
+	* `git branch -vv`
 * přidat 
 ```
 sys.argv[1]
 ```
 	* `git status`
-	* `git diff`
 	* `git commit`
 * `git checkout master`
 	* popsat
 * `git branch dog; git checkout dog;` == `git checkout -b dog`
+	* doplnit *dog* feature
 	* `git commit`
 	* popsat `git log` graf
-* `git merge cat`	
+	* [vizualizace](https://learngitbranching.js.org/?NODEMO=&locale=en_US)
+* `git merge <branch(cat)>`	
 	* popsat Fast-forward
+	* [vizualizace](https://learngitbranching.js.org/?NODEMO=&locale=en_US)
 * `git merge dog`
 	* popsat Merge-conflict
-	* `git add <file>`
 	* `git merge --continue`
-	* popsat historii
+
 ### Nahrávání změn do vzdáleného repozitáře
+
 * `git remote`
-	* vypíše všechny remoty
 * `GitHub – vytvoření repozitáře`
 * `git remote add <name> <url>`
 * `git push <remote> <local branch>:<remote branch>`
-* `git commit`
-	* popsat `origin/master` vs `master`
+* upravit README
+	* `git commit`
+	* `git log` → popsat `origin/master` vs `master`
 * `git branch --set-upstream-to=origin/master` | `git push -u origin master`
 * `git branch -vv`
+* `git push`
 
 ### Stáhnutí repozitáře
+
 * `git clone <url> [folder name]`
-	* nasimulovat commit od druheho programatora
-* `git fetch`
-* `git git merge origin/master`
-* `git pull --all`
+* nasimulovat commit a push prvního programátora (upravit README)
+* druhý programátor vytvoří `cow` funkcionalitu
+	* `git push` → odmítnuto
+	* `git fetch`
+	* `git merge origin/master`
+	* `git pull` = `git fetch; git merge origin/master`
 * shrnuti
-	* `git remote`, `git push`, `git fetch` nasledovaný `git merge`, `git pull`
-	* `git pull`
+	* `git remote`, `git push`, `git fetch`, `git merge`, `git pull`
 
 <p align="center">
 <b>OTÁZKY ???</b><br>
 (příkazy pro nastavování jsou příšerné)
 </p>
 
-## 3. Honorable mentions
+### Další užitečné příkazy
+* `git add -p`
+	* nápověda `?`
+* `git commit --amend --no-edit`
+* zrušení psaní commit message prázdným obsahem
+* `git add .`
+* `git checkout -`
+* `git revert <hash>`
+* `git blame [commit] <file>`
+	* `git blame 8acab378ae40c4d0695b330e9ac14ce1b09977b5 Java\ Development/zlbpwa_api/src/zlbpwa/api/service/SampleCardService.java`
+	* rádka 125
+	* ukázat `blame` na GitHubu
 
-### Konfigurační soubory
+## 5. Konfigurační soubory
 * `~/.gitconfig` vs `.git/config`
 
-### Gitignore
+## 6. Gitignore
 * https://github.com/github/gitignore
 * `DS_Store`
 
-#### Další užitečné příkazy
-* `git blame`
-	* pripravit priklad s Petrem Schmiedem
-* `git add -p`
-* `git commit --amend --no-edit`
-* zrušení psaní commit message prázdným obsahem
-* `git stash` pro umožnění checkout
-* `git add .`
-* `git merge -`
-* `git revert <hash>`
 
-## 4. Závěr
+## 7. Závěr
